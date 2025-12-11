@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ movie.Title }} - Detalhes{% endblock %}
+
+{% block content %}
+<section class="detail-layout">
+  <div class="detail-poster">
+    {% if movie.Poster and movie.Poster != 'N/A' %}
+    <img src="{{ movie.Poster }}" alt="Poster de {{ movie.Title }}" />
+    {% else %}
+    <div class="poster-placeholder large">Sem imagem</div>
+    {% endif %}
+  </div>
+
+  <div class="detail-info">
+    <a href="{{ url_for('index') }}" class="back-button">← Voltar para a lista</a>
+
+    <h2>{{ movie.Title }}</h2>
+    <p class="muted">
+      {{ movie.Year }} • {{ movie.Runtime }} • {{ movie.Genre }}
+    </p>
+
+    {% if movie.imdbRating and movie.imdbRating != 'N/A' %}
+    <p class="rating-large">
+      ⭐ <strong>{{ movie.imdbRating }}</strong>/10
+      <span class="muted">IMDb</span>
+    </p>
+    {% endif %}
+
+    <div class="detail-section">
+      <h3>Sinopse</h3>
+      <p>{{ movie.Plot or "Sinopse não disponível." }}</p>
+    </div>
+
+    <div class="detail-grid">
+      <div>
+        <h4>Diretor</h4>
+        <p>{{ movie.Director or "Desconhecido" }}</p>
+      </div>
+      <div>
+        <h4>Elenco</h4>
+        <p>{{ movie.Actors or "Não informado" }}</p>
+      </div>
+      <div>
+        <h4>Idioma</h4>
+        <p>{{ movie.Language or "Não informado" }}</p>
+      </div>
+      <div>
+        <h4>País</h4>
+        <p>{{ movie.Country or "Não informado" }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+

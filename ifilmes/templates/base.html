@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Catálogo de Filmes{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-content">
+        <h1 class="logo">
+          🎬 Catálogo de Filmes
+        </h1>
+        <form class="search-form" method="get" action="{{ url_for('index') }}">
+          <input
+            type="text"
+            name="q"
+            placeholder="Buscar por título..."
+            value="{{ query or '' }}"
+          />
+          {% if selected_genre %}
+          <input type="hidden" name="genre" value="{{ selected_genre }}" />
+          {% endif %}
+          <button type="submit">Buscar</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="container">
+      {% if not has_api_key %}
+      <div class="alert">
+        <strong>Aviso:</strong> Nenhuma chave de API OMDb foi configurada. Defina a
+        variável de ambiente <code>OMDB_API_KEY</code> para carregar os filmes
+        automaticamente da API.
+      </div>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>Feito com Flask + OMDb API</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+
