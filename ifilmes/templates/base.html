@@ -28,14 +28,6 @@
     </header>
 
     <main class="container">
-      {% if not has_api_key %}
-      <div class="alert">
-        <strong>Aviso:</strong> Nenhuma chave de API OMDb foi configurada. Defina a
-        variável de ambiente <code>OMDB_API_KEY</code> para carregar os filmes
-        automaticamente da API.
-      </div>
-      {% endif %}
-
       {% block content %}{% endblock %}
     </main>
 
